@@ -6,12 +6,13 @@ public class Driver {
 		
 		GameArena arena = new GameArena(1280, 720);
 		
-		int numBalls = 16000;
+		int numBalls = 16;
 		
 		Ball[] balls = new Ball[numBalls];
 		
 		for(int i = 0; i < numBalls; i++) {
 			balls[i] = new Ball(740, 560, 10, "#555555");
+			
 			balls[i].setXVelocity(rGen.nextDouble() * 50.0);
 			balls[i].setYVelocity(rGen.nextDouble() * 50.0);
 			
