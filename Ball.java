@@ -189,6 +189,10 @@ public class Ball
 		else if(yVelocity < 0)
 			yVelocity += drag;
 	}
+	
+	public void addToGameArena(GameArena ga) {
+		ga.addBall(this);
+	}
 
     /**
      * Constructor. Creates an instance of Ball with the given chatacteristics.

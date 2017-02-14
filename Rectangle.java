@@ -84,6 +84,10 @@ public class Rectangle
 	{
 		return colour;
 	}
+	
+	public void addToGameArena(GameArena ga) {
+		ga.addRectangle(this);
+	}
 
     /**
      * Constructor. Creates an instance of Rectangle with the given chatacteristics.
