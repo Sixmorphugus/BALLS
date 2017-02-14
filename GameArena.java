@@ -147,7 +147,7 @@ public class GameArena
 	/**
 	 * A method called by the operating system to draw onto the screen - <p><B>YOU DO NOT (AND SHOULD NOT) NEED TO CALL THIS METHOD.</b></p>
 	 */
-	private void frameUpdate ()
+	protected void frameUpdate() // the only edit I needed to make to override frameUpdate (-- Chris)
     {
         if (!this.exiting)
         {
