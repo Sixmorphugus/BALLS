@@ -136,7 +136,9 @@ public class Ball extends Shape
 	/**
 	 * Keep moving.
 	 */
-	public void update() {
+	@Override
+	public void update(World w) {
+		// slow down over time and move
 		moveX(xVelocity);
 		moveY(yVelocity);
 		
@@ -151,6 +153,19 @@ public class Ball extends Shape
 			yVelocity -= drag;
 		else if(yVelocity < 0)
 			yVelocity += drag;
+		
+		// collide with things
+		boolean outX = !isInAreaX(0, w.getWidth());
+		boolean outY = !isInAreaY(0, w.getHeight());
+		if (outX)
+			bounceX();
+
+		if (outY)
+			bounceY();
+
+		if (w.upPressed()) {
+			setYVelocity(-10);
+		}
 	}
 	
 	public void addToGameArena(GameArena ga) {

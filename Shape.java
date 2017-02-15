@@ -44,4 +44,31 @@ public class Shape {
 	{
 		this.yPosition = y;
 	}
+	
+	/**
+	 * Overridable for custom shapes.
+	 * Add other shapes that make up your shape to the GameArena via an overload of this.
+	 * @param w The world.
+	 */
+	public void pushShapes(World w) {
+		
+	}
+	
+	/**
+	 * Overridable for custom shapes.
+	 * Remove other shapes that make up your shape from the GameArena via an overload of this.
+	 * @param w The world.
+	 */
+	public void popShapes(World w) {
+		
+	}
+	
+	/**
+	 * Overridable for shapes.
+	 * Make your shape do something every frame via an override of this.
+	 * @param w The world.
+	 */
+	public void update(World w) {
+		
+	}
 }

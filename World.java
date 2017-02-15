@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A Level, but it has an update function for keeping physics going.
@@ -12,27 +12,26 @@ import java.util.List;
  * @author Chris Sixsmith
  */
 
-public class World extends Level
+public class World
 {
-	protected List<Ball> knownBalls;
-	protected List<Rectangle> knownRectangles;
+	protected ArrayList<Shape> objects = new ArrayList<Shape>();
+	
+	protected GameArena ga;
 	
 	/**
 	 * Create a new level.
 	 */
 	public World(int width, int height)
 	{
-		//super(width, height);
+		ga = new GameArena(width, height);
 	}
 	
-	/**
-	 * A method called by the operating system to draw onto the screen - <p><B>YOU DO NOT (AND SHOULD NOT) NEED TO CALL THIS METHOD.</b></p>
-	 * Edit it to edit what happens every frame (currently we're just updating ball physics)
-	 */
-	protected void frameUpdate() {
-		//super(); // do the default frameUpdate
+	public void update() {
+		for(int i = 0; i < getNumShapes(); i++) {
+			getShape(i).update(this); // call shape's update function
+		}
 		
-		
+		ga.pause();
 	}
 	
 	/**
@@ -58,76 +57,131 @@ public class World extends Level
 	}
 	
 	/**
-	 * Returns the number of cached balls.
+	 * Returns the number of cached shapes.
 	 */
-//	public int getNumBalls() {
-//		return 1;
-//	}
+	public int getNumShapes() {
+		return objects.size();
+	}
 	
 	/**
-	 * Returns the number of cached rectangles.
+	 * Returns a cached shape.
+	 * If the shape doesn't exist it returns null.
 	 */
-//	public int getNumRectangles() {
-//		
-//	}
+	public Shape getShape(int index) {
+		if(index >= objects.size() || index < 0)
+			return null;
+		
+		return objects.get(index);
+	}
 	
 	/**
-	 * Returns a cached ball.
-	 * If the ball doesn't exist it returns null.
-	 */
-//	public Ball getBall(int index) {
-//		
-//	}
-	
-	/**
-	 * Returns a cached rectangle.
-	 * If the rectangle doesn't exist it returns null.
-	 */
-//	public Rectangle getRectangle(int index) {
-//		
-//	}
-	
-	/**
-	 * Adds a given Ball to the Level. 
-	 * Once a Ball is added, it will automatically appear on the window. 
+	 * Adds a given Shape to the Level. 
+	 * Once a Shape is added, it will automatically appear on the window. 
 	 *
-	 * @param b the ball to add to the Level.
+	 * @param b the Shape to add to the Level.
 	 */
-	public void addBall(Ball b)
+	public void addShape(Shape s)
 	{
-	//	super(b);
+		objects.add(s);
+		
+		if(s.getClass().equals(Ball.class)) {
+			Ball b = (Ball)s;
+			ga.addBall(b);
+		}
+		else if(s.getClass().equals(Rectangle.class)) {
+			Rectangle r = (Rectangle)s;
+			ga.addRectangle(r);
+		}
+		else {
+			s.pushShapes(this);
+		}
 	}
 
 	/**
-	 * Remove a Ball from the Level. 
-	 * Once a Ball is removed, it will no longer appear on the window. 
+	 * Remove a Shape from the Level. 
+	 * Once a Shape is removed, it will no longer appear on the window. 
 	 *
-	 * @param b the ball to remove from the Level.
+	 * @param b the Shape to remove from the Level.
 	 */
-	public void removeBall(Ball b)
+	public void removeShape(Shape s)
 	{
-	//	super(b);
+		objects.remove(s);
+		
+		if(s.getClass().equals(Ball.class)) {
+			Ball b = (Ball)s;
+			ga.removeBall(b);
+		}
+		else if(s.getClass().equals(Rectangle.class)) {
+			Rectangle r = (Rectangle)s;
+			ga.removeRectangle(r);
+		}
+	}
+	
+	/**
+	 * Find a shape's ID in the world.
+	 * @param s Shape to get the index of.
+	 * @return the shape's ID.
+	 */
+	public int indexOf(Shape s) {
+		for(int i = 0; i < objects.size(); i++) {
+			if(objects.get(i) == s)
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	/** 
+	 * Gets the width of the GameArena window, in pixels.
+	 * @return the width in pixels
+	 */
+	public int getWidth()
+	{
+		return ga.getArenaWidth();
 	}
 
-	/**
-	 * Adds a given rectangle to the Level. 
-	 * Once a Rectangle is added, it will automatically appear on the window. 
-	 *
-	 * @param r the rectangle to add to the Level.
+	/** 
+	 * Gets the height of the GameArena window, in pixels.
+	 * @return the height in pixels
 	 */
-	public void addRectangle(Rectangle r)
+	public int getHeight()
 	{
-	//	super(r);
+		return ga.getArenaHeight();
 	}
 
-	/**
-	 * Remove a Rectangle from the Level. 
-	 * Once a Rectangle is removed, it will no longer appear on the window. 
-	 *
-	 * @param r the rectangle to remove from the Level.
+	/** 
+	 * Determines if the user is currently pressing the cursor up button.
+	 * @return true if the up button is pressed, false otherwise.
 	 */
-	public void removeRectangle(Rectangle r)
+	public boolean upPressed()
 	{
-	//	super(r);
+		return ga.upPressed();
+	}
+
+	/** 
+	 * Determines if the user is currently pressing the cursor down button.
+	 * @return true if the down button is pressed, false otherwise.
+	 */
+	public boolean downPressed()
+	{
+		return ga.downPressed();
+	}
+
+	/** 
+	 * Determines if the user is currently pressing the cursor left button.
+	 * @return true if the left button is pressed, false otherwise.
+	 */
+	public boolean leftPressed()
+	{
+		return ga.leftPressed();
+	}
+
+	/** 
+	 * Determines if the user is currently pressing the cursor right button.
+	 * @return true if the right button is pressed, false otherwise.
+	 */
+	public boolean rightPressed()
+	{
+		return ga.rightPressed();
 	}
 }

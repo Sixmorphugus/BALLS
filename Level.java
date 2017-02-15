@@ -6,10 +6,7 @@ import java.util.ArrayList;
  */
  
 public class Level {
-	private ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
-	private ArrayList<Shape> charctaer = new ArrayList<Shape>();
-	
-	//private ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
+	private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
 	
 	/**
 	 * Creates a new, empty level.
@@ -31,19 +28,5 @@ public class Level {
 	void exportFile(String fileToSaveTo)
 	{
 	}
-	
-	/**
-	 * Returns the number of cached rectangles.
-	 */
-//	public int getNumRectangles() {
-//		
-//	}
-	
-	/**
-	 * Returns a cached rectangle.
-	 * If the rectangle doesn't exist it returns null.
-	 */
-//	public Rectangle getRectangle(int index) {
-//		
-//	}
+
 }
