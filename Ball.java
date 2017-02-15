@@ -3,15 +3,13 @@
  * This class represents a Ball object. When combined with the GameArena class,
  * instances of the Ball class can be displayed on the screen.
  */
-public class Ball 
+public class Ball extends Shape
 {
 	// The following instance variables define the
 	// information needed to represent a Ball
 	// Feel free to more instance variables if you think it will 
 	// support your work... 
 	
-	private double xPosition;			// The X coordinate of this Ball
-	private double yPosition;			// The Y coordinate of this Ball
 	private double xVelocity;			// The X velocity of this Ball
 	private double yVelocity;			// The Y velocity of this Ball
 	private double size;				// The diameter of this Ball
@@ -26,41 +24,6 @@ public class Ball
 	private double xStart;				// Starting X coordinate of the ball.
 	private double yStart;				// Starting Y coordinate of the ball.
 
-	/**
-	 * Obtains the current position of this Ball.
-	 * @return the X coordinate of this Ball within the GameArena.
-	 */
-	public double getXPosition()
-	{
-		return xPosition;
-	}
-
-	/**
-	 * Obtains the current position of this Ball.
-	 * @return the Y coordinate of this Ball within the GameArena.
-	 */
-	public double getYPosition()
-	{
-		return yPosition;
-	}
-
-	/**
-	 * Moves the current position of this Ball to the given co-ordinates
-	 * @param x the new x co-ordinate of this Ball
-	 */
-	public void setXPosition(double x)
-	{
-		this.xPosition = x;
-	}
-
-	/**
-	 * Moves the current position of this Ball to the given co-ordinates
-	 * @param y the new y co-ordinate of this Ball
-	 */
-	public void setYPosition(double y)
-	{
-		this.yPosition = y;
-	}
 	
 	/**
 	 * Obtains the current Velocity of this Ball.
@@ -103,7 +66,7 @@ public class Ball
 	 * @param x the x offset
 	 */
 	public void moveX(double x) {
-		this.xPosition += x;
+		setXPosition(getXPosition() + x);
 	}
 	
 	/**
@@ -111,7 +74,7 @@ public class Ball
 	 * @param x the x offset
 	 */
 	public void moveY(double y) {
-		this.yPosition += y;
+		setYPosition(getYPosition() + y);
 	}
 
 	/**
@@ -137,7 +100,7 @@ public class Ball
 	 * @return whether or not the ball is in the area given.
 	 */
 	public boolean isInAreaX(float xBoxStart, float xBoxFinish) {
-		return (xPosition >= xBoxStart && xPosition <= xBoxFinish);
+		return (getXPosition() >= xBoxStart && getXPosition() <= xBoxFinish);
 	}
 	
 	/**
@@ -145,7 +108,7 @@ public class Ball
 	 * @return whether or not the ball is in the area given.
 	 */
 	public boolean isInAreaY(float yBoxStart, float yBoxFinish) {
-		return (yPosition >= yBoxStart && yPosition <= yBoxFinish);
+		return (getYPosition() >= yBoxStart && getYPosition() <= yBoxFinish);
 	}
 	
 	/**
@@ -206,8 +169,7 @@ public class Ball
      */
 	public Ball(double x, double y, double diameter, String col)
 	{
-		xPosition = x;
-		yPosition = y;
+		super(x,y);
 		xStart = x;
 		yStart = y;
 		size = diameter;

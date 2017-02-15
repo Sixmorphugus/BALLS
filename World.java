@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * A Level, but it has an update function for keeping physics going.
  *
@@ -20,7 +22,7 @@ public class World extends Level
 	 */
 	public World(int width, int height)
 	{
-		super(width, height);
+		//super(width, height);
 	}
 	
 	/**
@@ -28,7 +30,7 @@ public class World extends Level
 	 * Edit it to edit what happens every frame (currently we're just updating ball physics)
 	 */
 	protected void frameUpdate() {
-		super(); // do the default frameUpdate
+		//super(); // do the default frameUpdate
 		
 		
 	}
@@ -45,7 +47,7 @@ public class World extends Level
 	 * Imports a level object that was loaded from somewhere.
 	 */
 	public void importLevel(Level in) {
-		import(in, true);
+		//import(in, true);
 	}
 	
 	/**
@@ -58,32 +60,32 @@ public class World extends Level
 	/**
 	 * Returns the number of cached balls.
 	 */
-	public int getNumBalls() {
-		
-	}
+//	public int getNumBalls() {
+//		return 1;
+//	}
 	
 	/**
 	 * Returns the number of cached rectangles.
 	 */
-	public int getNumRectangles() {
-		
-	}
+//	public int getNumRectangles() {
+//		
+//	}
 	
 	/**
 	 * Returns a cached ball.
 	 * If the ball doesn't exist it returns null.
 	 */
-	public Ball getBall(int index) {
-		
-	}
+//	public Ball getBall(int index) {
+//		
+//	}
 	
 	/**
 	 * Returns a cached rectangle.
 	 * If the rectangle doesn't exist it returns null.
 	 */
-	public Rectangle getRectangle(int index) {
-		
-	}
+//	public Rectangle getRectangle(int index) {
+//		
+//	}
 	
 	/**
 	 * Adds a given Ball to the Level. 
@@ -93,7 +95,7 @@ public class World extends Level
 	 */
 	public void addBall(Ball b)
 	{
-		super(b);
+	//	super(b);
 	}
 
 	/**
@@ -104,7 +106,7 @@ public class World extends Level
 	 */
 	public void removeBall(Ball b)
 	{
-		super(b);
+	//	super(b);
 	}
 
 	/**
@@ -115,7 +117,7 @@ public class World extends Level
 	 */
 	public void addRectangle(Rectangle r)
 	{
-		super(r);
+	//	super(r);
 	}
 
 	/**
@@ -126,6 +128,6 @@ public class World extends Level
 	 */
 	public void removeRectangle(Rectangle r)
 	{
-		super(r);
+	//	super(r);
 	}
 }

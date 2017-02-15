@@ -1,10 +1,15 @@
+import java.util.ArrayList;
+
 /**
  * Saved world object.
  * You can also load it into a game arena but you would have to add the rectangles one by one.
  */
  
 public class Level {
-	private List<Rectangle> knownRectangles;
+	private ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
+	private ArrayList<Shape> charctaer = new ArrayList<Shape>();
+	
+	//private ArrayList<Rectangle> obstacles = new ArrayList<Rectangle>();
 	
 	/**
 	 * Creates a new, empty level.
@@ -30,15 +35,15 @@ public class Level {
 	/**
 	 * Returns the number of cached rectangles.
 	 */
-	public int getNumRectangles() {
-		
-	}
+//	public int getNumRectangles() {
+//		
+//	}
 	
 	/**
 	 * Returns a cached rectangle.
 	 * If the rectangle doesn't exist it returns null.
 	 */
-	public Rectangle getRectangle(int index) {
-		
-	}
+//	public Rectangle getRectangle(int index) {
+//		
+//	}
 }
