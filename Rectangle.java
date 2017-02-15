@@ -64,9 +64,9 @@ public class Rectangle extends Shape
      * "BLACK", "BLUE", "CYAN", "DARKGREY", "GREY", "GREEN", "LIGHTGREY", "MAGENTA", "ORANGE", "PINK", "RED", "WHITE", "YELLOW".
      * Alternatively, 8 bit hexadecimal RGB values can be given, in the format "#RRGGBB". e.g. "#FF0000" is a pure read, "#0000FF" is pure blue, etc.
      */
-	public Rectangle(double x, double y, double w, double h, String col)
+	public Rectangle(double x, double y, double w, double h, String col,ShapeType controller)
 	{
-		super(x,y);
+		super(x,y,controller);
 		width = w;
 		height = h;
 		colour = col;

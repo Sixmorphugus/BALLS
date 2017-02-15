@@ -155,8 +155,8 @@ public class Ball extends Shape
 			yVelocity += drag;
 		
 		// collide with things
-		boolean outX = !isInAreaX(0, w.getWidth());
-		boolean outY = !isInAreaY(0, w.getHeight());
+		boolean outX = !isInAreaX(0, w.getArenaWidth());
+		boolean outY = !isInAreaY(0, w.getArenaHeight());
 		if (outX)
 			bounceX();
 
@@ -182,13 +182,12 @@ public class Ball extends Shape
      * "BLACK", "BLUE", "CYAN", "DARKGREY", "GREY", "GREEN", "LIGHTGREY", "MAGENTA", "ORANGE", "PINK", "RED", "WHITE", "YELLOW".
      * Alternatively, 8 bit hexadecimal RGB values can be given, in the format "#RRGGBB". e.g. "#FF0000" is a pure read, "#0000FF" is pure blue, etc.
      */
-	public Ball(double x, double y, double diameter, String col)
-	{
-		super(x,y);
+	public Ball(double x, double y, double diameter, String col, ShapeType controller) {
+		super(x, y, controller);
 		xStart = x;
 		yStart = y;
 		size = diameter;
 		drag = diameter / 100;
 		colour = col;
-	}	
+	}
 }

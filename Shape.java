@@ -1,12 +1,19 @@
+import java.io.Serializable;
 
-public class Shape {
-
+public class Shape implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 13L;
+	private ShapeType controller;
 	private double xPosition;			// The X coordinate of centre of this Rectangle
 	private double yPosition;			// The Y coordinate of centre of this Rectangle
 	
-	public Shape(double x, double y){
+	public Shape(double x, double y,ShapeType controller){
 		xPosition=x;
 		yPosition=y;
+		this.controller=controller;
 	}
 	
 	/**
