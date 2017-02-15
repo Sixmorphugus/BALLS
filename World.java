@@ -12,18 +12,17 @@ import java.util.ArrayList;
  * @author Chris Sixsmith
  */
 
-public class World
+public class World extends GameArena
 {
 	protected ArrayList<Shape> objects = new ArrayList<Shape>();
 	
-	protected GameArena ga;
 	
 	/**
 	 * Create a new level.
 	 */
 	public World(int width, int height)
 	{
-		ga = new GameArena(width, height);
+		super(width, height);
 	}
 	
 	public void update() {
@@ -31,7 +30,7 @@ public class World
 			getShape(i).update(this); // call shape's update function
 		}
 		
-		ga.pause();
+		pause();
 	}
 	
 	/**
@@ -86,14 +85,15 @@ public class World
 		
 		if(s.getClass().equals(Ball.class)) {
 			Ball b = (Ball)s;
-			ga.addBall(b);
+			addBall(b);
 		}
 		else if(s.getClass().equals(Rectangle.class)) {
 			Rectangle r = (Rectangle)s;
-			ga.addRectangle(r);
+			addRectangle(r);
 		}
 		else {
-			s.pushShapes(this);
+			//s.pushShapes(this);
+			
 		}
 	}
 
@@ -101,7 +101,7 @@ public class World
 	 * Remove a Shape from the Level. 
 	 * Once a Shape is removed, it will no longer appear on the window. 
 	 *
-	 * @param b the Shape to remove from the Level.
+	 * @param Shape s to be removed from the Level.
 	 */
 	public void removeShape(Shape s)
 	{
@@ -109,17 +109,17 @@ public class World
 		
 		if(s.getClass().equals(Ball.class)) {
 			Ball b = (Ball)s;
-			ga.removeBall(b);
+			removeBall(b);
 		}
 		else if(s.getClass().equals(Rectangle.class)) {
 			Rectangle r = (Rectangle)s;
-			ga.removeRectangle(r);
+			removeRectangle(r);
 		}
 	}
 	
 	/**
 	 * Find a shape's ID in the world.
-	 * @param s Shape to get the index of.
+	 * @param Shape s to get the index of.
 	 * @return the shape's ID.
 	 */
 	public int indexOf(Shape s) {
@@ -131,57 +131,5 @@ public class World
 		return -1;
 	}
 	
-	/** 
-	 * Gets the width of the GameArena window, in pixels.
-	 * @return the width in pixels
-	 */
-	public int getWidth()
-	{
-		return ga.getArenaWidth();
-	}
 
-	/** 
-	 * Gets the height of the GameArena window, in pixels.
-	 * @return the height in pixels
-	 */
-	public int getHeight()
-	{
-		return ga.getArenaHeight();
-	}
-
-	/** 
-	 * Determines if the user is currently pressing the cursor up button.
-	 * @return true if the up button is pressed, false otherwise.
-	 */
-	public boolean upPressed()
-	{
-		return ga.upPressed();
-	}
-
-	/** 
-	 * Determines if the user is currently pressing the cursor down button.
-	 * @return true if the down button is pressed, false otherwise.
-	 */
-	public boolean downPressed()
-	{
-		return ga.downPressed();
-	}
-
-	/** 
-	 * Determines if the user is currently pressing the cursor left button.
-	 * @return true if the left button is pressed, false otherwise.
-	 */
-	public boolean leftPressed()
-	{
-		return ga.leftPressed();
-	}
-
-	/** 
-	 * Determines if the user is currently pressing the cursor right button.
-	 * @return true if the right button is pressed, false otherwise.
-	 */
-	public boolean rightPressed()
-	{
-		return ga.rightPressed();
-	}
 }
