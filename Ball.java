@@ -29,6 +29,7 @@ public class Ball extends Shape {
 							// Pure red is "0000FF"
 	private double xStart; // Starting X coordinate of the ball.
 	private double yStart; // Starting Y coordinate of the ball.
+	Rectangle r; //for CollisionBoxes
 
 	/**
 	 * Obtains the current Velocity of this Ball.
@@ -111,8 +112,8 @@ public class Ball extends Shape {
 	 * 
 	 * @return whether or not the ball is in the area given.
 	 */
-	public boolean isInAreaX(float xBoxStart, float xBoxFinish) {
-		return (getXPosition() >= xBoxStart && getXPosition() <= xBoxFinish);
+	public boolean isInAreaX(double xBoxStart, double xBoxFinish) {
+		return (getXPosition()-getSize() >= xBoxStart && getXPosition()+getSize() <= xBoxFinish);
 	}
 
 	/**
@@ -120,8 +121,8 @@ public class Ball extends Shape {
 	 * 
 	 * @return whether or not the ball is in the area given.
 	 */
-	public boolean isInAreaY(float yBoxStart, float yBoxFinish) {
-		return (getYPosition() >= yBoxStart && getYPosition() <= yBoxFinish);
+	public boolean isInAreaY(double yBoxStart, double yBoxFinish) {
+		return (getYPosition()-getSize() >= yBoxStart && getYPosition()+getSize() <= yBoxFinish);
 	}
 
 	/**
@@ -168,22 +169,33 @@ public class Ball extends Shape {
 			yVelocity += drag;
 
 		// collide with things
-		boolean outX = !isInAreaX(0, w.getArenaWidth());
-		boolean outY = !isInAreaY(0, w.getArenaHeight());
-		if (outX)
+//		boolean outX = !isInAreaX(0, w.getArenaWidth());
+//		boolean outY = !isInAreaY(0, w.getArenaHeight());
+//		for(Shape s : w.objects){
+//			if(s.getClass().equals(Rectangle.class)) {
+//				Rectangle r = (Rectangle) s;
+//		if (isInAreaX(r.getXPosition()-r.getHeight()/2, r.getXPosition()+r.getHeight()/2))
+//			bounceX();
+//		if (isInAreaY(r.getYPosition()-r.getWidth()/2, r.getYPosition()+r.getWidth()/2))
+//			bounceY();
+//		}
+//		}
+//		if (isInAreaX(700, 800))
+//			bounceX();
+//		if (isInAreaY(600, 700))
+//			bounceY();
+		if (!isInAreaX(0, w.getArenaWidth()))
 			bounceX();
-
-		if (outY)
+		if (!isInAreaY(0, w.getArenaHeight()))
 			bounceY();
-
 		if (w.upPressed())
-			setYVelocity(-10);
+			setYVelocity(-5);
 
 		if (w.rightPressed())
-			setXVelocity(10);
+			setXVelocity(5);
 
 		if (w.leftPressed())
-			setXVelocity(-10);
+			setXVelocity(-5);
 
 	}
 
@@ -199,7 +211,7 @@ public class Ball extends Shape {
 	 * @param diameter
 	 *            The diameter of the Ball, in pixels.
 	 * @param col
-	 *            The colour of the Ball. Colour can be expressed as either a
+	 * 			  The colour of the Ball. Colour can be expressed as either a
 	 *            friendly name, including: "BLACK", "BLUE", "CYAN", "DARKGREY",
 	 *            "GREY", "GREEN", "LIGHTGREY", "MAGENTA", "ORANGE", "PINK",
 	 *            "RED", "WHITE", "YELLOW". Alternatively, 8 bit hexadecimal RGB

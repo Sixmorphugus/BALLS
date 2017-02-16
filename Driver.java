@@ -19,13 +19,21 @@ public class Driver {
 		ArrayList<Shape> shapes = Level.levelLoad(0);
 		for(Shape s : shapes)
 			w.addShape(s);
+		w.addShape(new Rectangle(750, 650, 50, 50, "BLUE", ShapeType.ComputerC));
 //		w.addShape(finish);
 //		w.addShape(obs1);
 //		w.addShape(obs2);
 //		w.addShape(obs3);
 //		w.addShape(obs4);
 //		w.addShape(b);	
-		
+//		for(Shape s : shapes){
+//			if(s.getClass().equals(Rectangle.class)) {
+//				
+//				Rectangle r = (Rectangle) s;
+//				w.removeShape(s);
+//		w.addShape(new Rectangle(r.getXPosition(), r.getYPosition(), r.getWidth(), r.getHeight(), "BLUE", ShapeType.ComputerC));
+//		}
+//		}
 		while(true) {
 			w.update();
 		}
