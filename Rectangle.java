@@ -10,6 +10,10 @@ public class Rectangle extends Shape
 	// Feel free to more instance variables if you think it will 
 	// support your work... 
 	
+	/**
+	 * Generated serialVersionUID
+	 */
+	private static final long serialVersionUID = 3626057187823375951L;
 	private double width;				// The width of this Rectangle
 	private double height;				// The height of this Rectangle
 	private String colour;	            // The colour of this Rectangle
@@ -49,9 +53,6 @@ public class Rectangle extends Shape
 		return colour;
 	}
 	
-	public void addToGameArena(GameArena ga) {
-		ga.addRectangle(this);
-	}
 
     /**
      * Constructor. Creates an instance of Rectangle with the given chatacteristics.

@@ -20,6 +20,10 @@ public class Level {
 			LevelObstacles.add(shapes);
 		}
 	}
+	public Level(){
+		
+	}
+	
 	public static ArrayList<Shape> levelLoad(int levelNo){
 		ArrayList<ArrayList<Shape>>	levels = null;
 		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("levels.dat"))){

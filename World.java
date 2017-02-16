@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @see Ball
  * @see Rectangle
  *
- * @author Chris Sixsmith
+ * @author Chris/Kilanth
  */
 
 public class World extends GameArena

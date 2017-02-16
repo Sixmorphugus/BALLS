@@ -9,10 +9,10 @@
  * <p></p>
  * <b>Available types:</b> <ul>
  * <li>UserC - Shape controlled by user</li>
- * <li>ComputerC - Shape controlled by user</li>
+ * <li>ComputerC - Shape controlled by computer</li>
  * <li>NeutralCC - Shape will remain idle during it's lifetime</li>
  * </ul>
- * @author Azureus Aeterna
+ * @author Kilanth/Chris
  * 
  */
 public enum ShapeType {
