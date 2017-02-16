@@ -37,9 +37,9 @@ public class World extends GameArena
 	 * Creates a level object that matches what's in the world.
 	 * <B>Balls are not saved in a level.</b>
 	 */
-	public Level exportLevel() {
-		return new Level();
-	}
+//	public Level exportLevel() {
+//		
+//	}
 	
 	/**
 	 * Imports a level object that was loaded from somewhere.

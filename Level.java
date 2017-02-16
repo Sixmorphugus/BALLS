@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 /**
@@ -6,27 +10,32 @@ import java.util.ArrayList;
  */
  
 public class Level {
-	private ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
-	
+	private ArrayList<Shape> LevelObstacles = new ArrayList<Shape>();
 	/**
-	 * Creates a new, empty level.
+	 * Creates a new level.
 	 */
-	public Level()
+	public Level(ArrayList<Shape> levelShapes)
 	{
+		for(Shape shapes : levelShapes){
+			LevelObstacles.add(shapes);
+		}
 	}
-	
-	/**
-	 * Creates the level from a saved one.
-	 */
-	public Level(String fileToLoadFrom)
-	{
-	}
-	
-	/**
-	 * Saves a level file that can be used to create the level.
-	 */
-	void exportFile(String fileToSaveTo)
-	{
+	public static ArrayList<Shape> levelLoad(int levelNo){
+		ArrayList<ArrayList<Shape>>	levels = null;
+		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("levels.dat"))){
+			
+		levels = (ArrayList<ArrayList<Shape>>) ois.readObject();
+			
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return levels.get(levelNo);
 	}
 
 }
