@@ -350,6 +350,10 @@ public class GameArena
 		return arenaHeight;
 	}
 
+	public Bounds getBoundsRepresentation() {
+		return new Bounds(getArenaWidth() / 2, getArenaHeight() / 2, getArenaWidth(), getArenaHeight());
+	}
+	
 	/** 
 	 * Determines if the user is currently pressing the cursor up button.
 	 * @return true if the up button is pressed, false otherwise.

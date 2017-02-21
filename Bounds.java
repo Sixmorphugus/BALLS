@@ -48,7 +48,57 @@ public class Bounds {
 		return y + (height / 2);
 	}
 	
-	public boolean collidesWith(Bounds otherBounds) {
-		
+	public boolean collidesX(Bounds otherBounds) {
+		return (
+			   getTopLeftX() < otherBounds.getBotRightX()
+			&& getBotRightX() > otherBounds.getTopLeftX()
+		);
+	}
+	
+	public boolean collidesY(Bounds otherBounds) {
+		return (
+			   getTopLeftY() < otherBounds.getBotRightY()
+			&& getBotRightY() > otherBounds.getTopLeftY()
+		);
+	}
+	
+	/**
+	 * Is the object in the area given?
+	 * 
+	 * @return whether or not the object is in the area given.
+	 */
+	public boolean isInsideX(Bounds otherBounds) {
+		return (
+			   getTopLeftX() >= otherBounds.getTopLeftX()
+			&& getBotRightX() <= otherBounds.getBotRightX()
+		);
+	}
+
+	/**
+	 * Is the object in the area given?
+	 * 
+	 * @return whether or not the object is in the area given.
+	 */
+	public boolean isInsideY(Bounds otherBounds) {
+		return (
+			   getTopLeftY() >= otherBounds.getTopLeftY()
+			&& getBotRightY() <= otherBounds.getBotRightY()
+		);
+	}
+	
+	public boolean isInside(Bounds otherBounds)
+	{
+		return (
+			   isInsideX(otherBounds)
+			&& isInsideY(otherBounds)
+		);
+	}
+	
+	public boolean collides(Bounds otherBounds)
+	{
+		return (
+			   collidesX(otherBounds)
+			&& collidesY(otherBounds)
+		);
 	}
 }

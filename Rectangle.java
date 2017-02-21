@@ -26,6 +26,10 @@ public class Rectangle extends Shape
 
 	
 
+	public Bounds getBoundsRepresentation() {
+		return new Bounds(getXPosition(), getYPosition(), getWidth(), getHeight());
+	}
+	
 	/**
 	 * Obtains the width of this Rectangle.
 	 * @return the width of this Rectangle,in pixels.

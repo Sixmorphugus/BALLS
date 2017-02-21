@@ -39,6 +39,10 @@ public class Shape implements Serializable{
 	{
 		return xPosition;
 	}
+	
+	public Bounds getBoundsRepresentation() {
+		return new Bounds(getXPosition(), getYPosition(), 0, 0);
+	}
 
 	/**
 	 * Obtains the current position of this Shape.

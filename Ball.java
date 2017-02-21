@@ -29,8 +29,11 @@ public class Ball extends Shape {
 							// Pure red is "0000FF"
 	private double xStart; // Starting X coordinate of the ball.
 	private double yStart; // Starting Y coordinate of the ball.
-	Rectangle r; //for CollisionBoxes
 
+	public Bounds getBoundsRepresentation() {
+		return new Bounds(getXPosition(), getYPosition(), getSize() * 2, getSize() * 2);
+	}
+	
 	/**
 	 * Obtains the current Velocity of this Ball.
 	 * 
@@ -50,7 +53,7 @@ public class Ball extends Shape {
 	}
 
 	/**
-	 * Moves the current Velocity of this Ball to the given co-ordinates
+	 * Sets the current x Velocity of this Ball to the given
 	 * 
 	 * @param x
 	 *            the new x co-ordinate of this Ball
@@ -60,13 +63,33 @@ public class Ball extends Shape {
 	}
 
 	/**
-	 * Moves the current Velocity of this Ball to the given co-ordinates
+	 * Sets the current y Velocity of this Ball to the given
 	 * 
 	 * @param y
 	 *            the new y co-ordinate of this Ball
 	 */
 	public void setYVelocity(double y) {
 		this.yVelocity = y;
+	}
+	
+	/**
+	 * Adds the current x Velocity of this Ball to the given
+	 * 
+	 * @param x
+	 *            the new x co-ordinate of this Ball
+	 */
+	public void incXVelocity(double x) {
+		this.xVelocity += x;
+	}
+
+	/**
+	 * Adds the current y Velocity of this Ball to the given
+	 * 
+	 * @param y
+	 *            the new y co-ordinate of this Ball
+	 */
+	public void incYVelocity(double y) {
+		this.yVelocity += y;
 	}
 
 	/**
@@ -108,29 +131,14 @@ public class Ball extends Shape {
 	}
 
 	/**
-	 * Is the ball in the area given?
-	 * 
-	 * @return whether or not the ball is in the area given.
-	 */
-	public boolean isInAreaX(double xBoxStart, double xBoxFinish) {
-		return (getXPosition()-getSize() >= xBoxStart && getXPosition()+getSize() <= xBoxFinish);
-	}
-
-	/**
-	 * Is the ball in the area given?
-	 * 
-	 * @return whether or not the ball is in the area given.
-	 */
-	public boolean isInAreaY(double yBoxStart, double yBoxFinish) {
-		return (getYPosition()-getSize() >= yBoxStart && getYPosition()+getSize() <= yBoxFinish);
-	}
-
-	/**
 	 * Move the ball back to where it was created.
 	 */
 	public void returnToStartingPosition() {
 		setXPosition(xStart);
 		setYPosition(yStart);
+		
+		setXVelocity(0);
+		setYVelocity(0);
 	}
 
 	/**
@@ -145,6 +153,18 @@ public class Ball extends Shape {
 	 */
 	public void bounceY() {
 		setYVelocity(-yVelocity);
+	}
+	
+	public void bounce() {
+		//double bX = Math.abs(getXVelocity());
+		//double bY = Math.abs(getYVelocity());
+		
+		//if(bX > bY) {
+			bounceX();
+		//}
+		//else {
+			bounceY();
+		//}
 	}
 
 	/**
@@ -168,35 +188,43 @@ public class Ball extends Shape {
 		else if (yVelocity < 0)
 			yVelocity += drag;
 
-		// collide with things
-//		boolean outX = !isInAreaX(0, w.getArenaWidth());
-//		boolean outY = !isInAreaY(0, w.getArenaHeight());
-//		for(Shape s : w.objects){
-//			if(s.getClass().equals(Rectangle.class)) {
-//				Rectangle r = (Rectangle) s;
-//		if (isInAreaX(r.getXPosition()-r.getHeight()/2, r.getXPosition()+r.getHeight()/2))
-//			bounceX();
-//		if (isInAreaY(r.getYPosition()-r.getWidth()/2, r.getYPosition()+r.getWidth()/2))
-//			bounceY();
-//		}
-//		}
-//		if (isInAreaX(700, 800))
-//			bounceX();
-//		if (isInAreaY(600, 700))
-//			bounceY();
-		if (!isInAreaX(0, w.getArenaWidth()))
+		// collide with the arena edges
+		Bounds arenaBounds = w.getBoundsRepresentation();
+		Bounds ballBounds = getBoundsRepresentation();
+		
+		if(!ballBounds.isInsideX(arenaBounds))
 			bounceX();
-		if (!isInAreaY(0, w.getArenaHeight()))
+		
+		if(!ballBounds.isInsideY(arenaBounds))
 			bounceY();
+		
+		// collide with other shapes
+		for(int i = 0; i < w.getNumShapes(); i++) {
+			Shape s = w.getShape(i);
+			// don't collide with yourself
+			if(s == this)
+				continue;
+			
+			Bounds sb = s.getBoundsRepresentation();
+			
+			if(ballBounds.collides(sb)) {
+				bounce();
+			}
+		}
+		
+		// ball can be influenced by keyboard for debug purposes
+		// comment out later
 		if (w.upPressed())
-			setYVelocity(-5);
+			incYVelocity(-1);
 
 		if (w.rightPressed())
-			setXVelocity(5);
+			incXVelocity(1);
 
 		if (w.leftPressed())
-			setXVelocity(-5);
-
+			incXVelocity(-1);
+		
+		if (w.downPressed())
+			returnToStartingPosition();
 	}
 
 	/**
